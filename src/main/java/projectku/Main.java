@@ -14,6 +14,7 @@ public class Main {
         ArrayList<Barang> keranjang = new ArrayList<>();
         ArrayList<Barang> choose = null;
         Gudang gudang = new Gudang();
+        keranjang keranjangku = new keranjang();
 
         while(loop == true) {
             boolean loop2 = true;
@@ -64,7 +65,7 @@ public class Main {
                         int masukanItem = input.nextInt();
 
                         if (masukanItem == 1) {
-                            keranjang.add(gudang.getFashion().get(barangPilih));
+                            keranjangku.tambahBarang(choose.get(barangPilih-1));
                             loop2 = false;
                         }
                     } else {
@@ -73,11 +74,14 @@ public class Main {
                 }
 
             } else if (menuAwal == 2) {
-                if (keranjang.size() == 0) {
+                if (keranjangku.ukuran() == 0) {
                     System.out.println("item di keranjang saat ini kosong");
                 } else {
+                    System.out.println("_".repeat(50));
                     System.out.println("Barang yang ada di keranjang anda: ");
-                    cetakBarang(keranjang);
+                    System.out.println("_".repeat(50));
+                    keranjangku.tampilkanKeranjang();
+                    System.out.println("_".repeat(50));
                     System.out.println();
                     System.out.print("""
                                 1. Checkout barang
@@ -93,18 +97,19 @@ public class Main {
                         int menuCheck = input.nextInt();
 
                         if (menuCheck == 1) {
-                            System.out.println("Total biaya: " + currency.format(tampilkanBiaya(keranjang)));
+                            System.out.println("Total biaya: " + currency.format(keranjangku.biayaTotal()));
                             System.out.print("Apakah anda yakin ingin checkout semua? 1 untuk ya dan 2 untuk tidak ==> ");
                             int check = input.nextInt();
 
                             if (check == 1) {
-                                keranjang.clear();
+                                keranjangku.clear();
                             }
                         } else if (menuCheck == 2) {
                             System.out.print("Barang mana yang akan anda bayar: ");
                             int bayarBarang = input.nextInt();
-                            System.out.println(keranjang.get(bayarBarang-1).getNamaBarang() + " dengan harga " + currency.format(keranjang.get(bayarBarang-1).getHarga()));
-                            keranjang.remove(bayarBarang-1);
+                            Barang pilihBarang = choose.get(bayarBarang-1);
+                            System.out.println(pilihBarang.getNamaBarang()+ " dengan harga " + currency.format(pilihBarang.getHarga()));
+                            keranjangku.hapusBarang(pilihBarang);
                         }
                     }
                 }

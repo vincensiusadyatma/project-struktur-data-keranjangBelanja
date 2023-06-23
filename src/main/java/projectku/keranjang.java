@@ -54,6 +54,8 @@ public class keranjang {
         }
         size++;
     }
+    
+    
 
     public Barang ambilBarang(int indeks) {
         if (indeks < 0 || indeks >= size) {
@@ -67,16 +69,69 @@ public class keranjang {
 
         return current.getBarang();
     }
+    
+   public void hapusBarang(Barang barang) {
+    Node saatIni = first;
+    Node sebelumnya = null;
+    
+    while (saatIni != null) {
+        if (saatIni.getBarang().equals(barang)) {
+            if (sebelumnya == null) {
+                first = saatIni.getKanan();
+            } else {
+                sebelumnya.setKanan(saatIni.getKanan());
+            }
+            
+            if (saatIni == last) {
+                last = sebelumnya;
+            }
+            
+            size--;
+            return;
+        }
+        
+        sebelumnya = saatIni;
+        saatIni = saatIni.getKanan();
+    }
+}
 
     public void tampilkanKeranjang() {
         Node current = first;
         System.out.println("Isi Keranjang:");
         while (current != null) {
-          // System.out.println(current.getBarang().getNama());
-            //current = current.getKanan();
+           System.out.println(current.getBarang().getNamaBarang());
+            current = current.getKanan();
         }
     }
+    
+     public Barang cariBarang(String nama) {
+        Node current = first;
+        while (current != null) {
+            if (current.getBarang().getNamaBarang().equals(nama)) {
+                return current.getBarang();
+            }
+            current = current.getKanan();
+        }
+        return null; // Barang tidak ditemukan
+    }
+     
+    public double biayaTotal() {
+    double total = 0;
+    Node saatIni = first;
 
+    while (saatIni != null) {
+        total += saatIni.getBarang().getHarga();
+        saatIni = saatIni.getKanan();
+    }
+
+    return total;
+}
+     
+    public void clear() {
+        first = null;
+        last = null;
+        size = 0;
+    }
     public int ukuran() {
         return size;
     }
