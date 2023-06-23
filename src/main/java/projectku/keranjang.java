@@ -4,7 +4,7 @@
  */
 package projectku;
 
-import java.util.ArrayList;
+
 
 class Node {
     private Barang barang;
