@@ -97,9 +97,11 @@ public class keranjang {
 
     public void tampilkanKeranjang() {
         Node current = first;
+        int i = 1; 
         System.out.println("Isi Keranjang:");
         while (current != null) {
-           System.out.println(current.getBarang().getNamaBarang());
+           System.out.println(i + " "+ current.getBarang().getNamaBarang());
+            i++;
             current = current.getKanan();
         }
     }
@@ -118,7 +120,7 @@ public class keranjang {
     public double biayaTotal() {
     double total = 0;
     Node saatIni = first;
-
+    
     while (saatIni != null) {
         total += saatIni.getBarang().getHarga();
         saatIni = saatIni.getKanan();

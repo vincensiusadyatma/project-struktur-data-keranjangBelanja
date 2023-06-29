@@ -197,7 +197,5 @@ public class Gudang {
         return wearable;
     }
 
-    int totalItem() {
-        return getFashion().size();
-    }
+   
 }

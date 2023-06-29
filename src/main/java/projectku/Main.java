@@ -46,6 +46,8 @@ public class Main {
                     choose = gudang.getWearable();
                     cetakBarang(choose);
 
+                }else{
+                    System.out.println("Kategori Tidak Ada Di Pilihan");
                 }
 
                 while (loop2 == true) {
@@ -88,30 +90,17 @@ public class Main {
                                 2. kembali
                             input:\s""");
                     int menuKeranjang = input.nextInt();
-
                     if (menuKeranjang == 1) {
-                        System.out.print("""
-                                    1. Checkout semua
-                                    2. Checkout satu barang
-                                input:\s""");
-                        int menuCheck = input.nextInt();
-
-                        if (menuCheck == 1) {
-                            System.out.println("Total biaya: " + currency.format(keranjangku.biayaTotal()));
+                           System.out.println("Total biaya: " + currency.format(keranjangku.biayaTotal()));
                             System.out.print("Apakah anda yakin ingin checkout semua? 1 untuk ya dan 2 untuk tidak ==> ");
                             int check = input.nextInt();
 
                             if (check == 1) {
                                 keranjangku.clear();
                             }
-                        } else if (menuCheck == 2) {
-                            System.out.print("Barang mana yang akan anda bayar: ");
-                            int bayarBarang = input.nextInt();
-                            Barang pilihBarang = choose.get(bayarBarang-1);
-                            System.out.println(pilihBarang.getNamaBarang()+ " dengan harga " + currency.format(pilihBarang.getHarga()));
-                            keranjangku.hapusBarang(pilihBarang);
-                        }
                     }
+                 
+                    
                 }
             } else if (menuAwal == 3) {
                 System.out.println("Terimakasih telah berbelanja disini");
@@ -129,13 +118,7 @@ public class Main {
         }
     }
 
-    static int tampilkanBiaya(ArrayList<Barang> barang) {
-        int total = 0;
-        for (int i = 0; i < barang.size(); i++) {
-            total += barang.get(i).getHarga();
-        }
-        return total;
-    }
+    
 
     static void menu() {
         System.out.println("========== MENU KERANJANG BELANJA ==========");
